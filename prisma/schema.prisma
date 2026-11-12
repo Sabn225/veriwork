@@ -1,0 +1,126 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  STUDENT
+  CLIENT
+  ADMIN
+}
+
+enum ProjectStatus {
+  PENDING_REVIEW
+  OPEN
+  IN_PROGRESS
+  SUBMITTED_L1
+  APPROVED_L2
+  COMPLETED
+  DISPUTED
+}
+
+model User {
+  id               String   @id @default(uuid())
+  email            String   @unique
+  passwordHash     String
+  fullName         String
+  username         String   @unique
+  university       String?
+  headline         String?
+  role             Role     @default(STUDENT)
+  eduVerified      Boolean  @default(false)
+  phoneVerified    Boolean  @default(false)
+  identityCipher   String?
+  identityVerified Boolean  @default(false)
+  trustScore       Int      @default(80)
+  walletBalance    Int      @default(0)
+  escrowLocked     Int      @default(0)
+  createdAt        DateTime @default(now())
+
+  projectsPosted   Project[]        @relation("ClientProjects")
+  submissions      Submission[]
+  experienceCards  ExperienceCard[]
+  auditLogs        AuditLog[]
+}
+
+model Project {
+  id             String        @id @default(uuid())
+  title          String
+  category       String
+  brief          String
+  budget         Int
+  deadlineDays   Int
+  checklist      Json
+  featured       Boolean       @default(false)
+  applicantCount Int           @default(0)
+  status         ProjectStatus @default(OPEN)
+  clientAnon     Boolean       @default(true)
+  clientName     String
+  clientId       String
+  client         User          @relation("ClientProjects", fields: [clientId], references: [id])
+  createdAt      DateTime      @default(now())
+
+  submissions    Submission[]
+  escrow         EscrowTransaction?
+  expCard        ExperienceCard?
+}
+
+model Submission {
+  id             String   @id @default(uuid())
+  projectId      String
+  project        Project  @relation(fields: [projectId], references: [id])
+  studentId      String
+  student        User     @relation(fields: [studentId], references: [id])
+  deliverableUrl String
+  notes          String?
+  l1Checklist    Json
+  l2Checklist    Json?
+  revisionCount  Int      @default(0)
+  contentHash    String
+  createdAt      DateTime @default(now())
+}
+
+model EscrowTransaction {
+  id            String   @id @default(uuid())
+  projectId     String   @unique
+  project       Project  @relation(fields: [projectId], references: [id])
+  totalAmount   Int
+  platformFee   Int
+  studentPayout Int
+  status        String   @default("HELD")
+  bankRefCode   String?  @unique
+  updatedAt     DateTime @updatedAt
+}
+
+model ExperienceCard {
+  id                 String   @id @default(uuid())
+  code               String   @unique
+  studentId          String
+  student            User     @relation(fields: [studentId], references: [id])
+  projectId          String   @unique
+  project            Project  @relation(fields: [projectId], references: [id])
+  roleTitle          String   @default("Content Writer")
+  rating             Float
+  clientReview       String
+  checklistResult    String
+  passedFirstAttempt Boolean  @default(true)
+  onTime             Boolean  @default(true)
+  portfolioPublished Boolean  @default(true)
+  sha256Signature    String
+  issuedAt           DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  actorId   String
+  actor     User     @relation(fields: [actorId], references: [id])
+  action    String
+  targetId  String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+}
