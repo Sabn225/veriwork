@@ -67,3 +67,7 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+
+# Uploaded files
+public/uploads/*
+!public/uploads/.gitkeep
