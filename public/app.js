@@ -1,3 +1,18 @@
+/* Header theo trạng thái đăng nhập + mở hộp thoại đăng nhập/đăng ký */
+(function () {
+  let user = null;
+  try { user = localStorage.getItem('vw_token') && JSON.parse(localStorage.getItem('vw_user') || 'null'); } catch (e) {}
+  document.documentElement.dataset.auth = user ? 'in' : 'out';
+  const name = user && user.fullName ? user.fullName : 'Khách (demo)';
+  const badge = document.getElementById('headerAvatarBadge'), label = document.getElementById('headerUserName');
+  if (label) label.textContent = name;
+  if (badge) badge.textContent = name.split(' ').filter(Boolean).slice(-2).map(w => w[0]).join('').toUpperCase() || 'K';
+  document.addEventListener('click', e => {
+    const open = e.target.closest('[data-auth-open]');
+    if (open && window.openAuthModal) window.openAuthModal(open.dataset.authOpen);
+    if (e.target.closest('[data-logout]') && window.logoutRealAccount) window.logoutRealAccount();
+  });
+})();
 /* ============================================================================
    K3: ĐẶT TÊN BIẾN RÕ NGHĨA, DỄ BẢO TRÌ & MỞ RỘNG
    ============================================================================ */
@@ -1210,7 +1225,7 @@ function openPostProjectModal() {
     try { localStorage.removeItem('veriwork_post_draft'); } catch (e) {}
     closeModal();
     resetProjectFilters();
-    switchView('home', 'du-an');
+    switchView('projects');
     showToast('✅ Đã đăng dự án mới thành công!');
   });
 

@@ -19,7 +19,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -37,16 +37,21 @@
     </div>
 
     <nav class="nav-tabs" role="tablist" aria-label="Điều hướng chính">
-      <button role="tab" data-nav="home" aria-selected="true">Khám phá</button>
-      <button role="tab" data-nav="home" data-scroll-to="du-an" aria-selected="false">Dự án</button>
-      <button role="tab" data-nav="home" data-scroll-to="cach-hoat-dong" aria-selected="false">Cách hoạt động</button>
-      <button role="tab" data-nav="home" data-scroll-to="ve-chung-toi" aria-selected="false">Về chúng tôi</button>
+      <button role="tab" data-nav="home" aria-selected="true">Trang chủ</button>
+      <button role="tab" data-nav="projects" aria-selected="false">Dự án</button>
+      <button role="tab" data-nav="services" aria-selected="false">Dịch vụ</button>
+      <button role="tab" data-nav="students" aria-selected="false">Sinh viên</button>
+      <button role="tab" data-nav="trust" aria-selected="false">Điểm tin cậy</button>
       <button role="tab" data-nav="admin" id="adminNavTab" aria-selected="false" style="display:none">🛡️ Quản trị</button>
     </nav>
 
     <div class="hd-act">
+      <div class="hd-guest hd-guest-box">
+        <button class="btn ghost sm" data-auth-open="login">Đăng nhập</button>
+        <button class="btn sm" data-auth-open="register">Đăng ký</button>
+      </div>
       <!-- J1: Notification Center (Dropdown Chuông thông báo) -->
-      <div class="dropdown-wrap">
+      <div class="dropdown-wrap hd-user-only">
         <button class="icon-btn" id="notifBtn" aria-label="Thông báo" title="Trung tâm thông báo">
           🔔
           <span id="notifBadge" style="position:absolute;top:6px;right:6px;width:9px;height:9px;background:var(--bad);border-radius:50%;border:2px solid var(--s)"></span>
@@ -87,12 +92,13 @@
           <button class="dd-item" data-switch-role="employer"><span>🏪 Góc nhìn Khách hàng</span><span id="roleCheckEmployer"></span></button>
           <button class="dd-item" data-switch-role="admin"><span>🛡️ Góc nhìn Quản trị viên (Admin)</span><span id="roleCheckAdmin"></span></button>
           <div class="dd-divider"></div>
-          <button class="dd-item" data-nav="auth"><span>🔑 Đăng nhập / Đăng ký tài khoản</span></button>
+          <button class="dd-item hd-guest" data-auth-open="login"><span>🔑 Đăng nhập / Đăng ký</span></button>
+          <button class="dd-item hd-user-only" data-logout><span>🚪 Đăng xuất</span></button>
         </div>
       </div>
 
       <!-- CTA Đăng dự án -->
-      <button class="btn sm" id="openPostBtn" style="min-height:44px">+ Đăng dự án</button>
+      <button class="btn sm hd-user-only" id="openPostBtn" style="min-height:44px">+ Đăng dự án</button>
     </div>
   </div>
 </header>
@@ -102,36 +108,24 @@
        VIEW 1: TRANG CHỦ KHÁM PHÁ & DỰ ÁN (#view-home)
        ================================================================= -->
   <div id="view-home" class="view-panel active">
-    <!-- B. HERO ĐƠN GIẢN HÓA & PHÂN CẤP THỊ GIÁC RÕ RÀNG -->
     <div class="w hero">
       <div>
         <h1>Bằng chứng kinh nghiệm thật, có mã xác thực.</h1>
         <p class="lead">Không hứa việc làm. Chỉ trao bằng chứng để bạn tự tin phỏng vấn.</p>
-
-        <!-- 1 CTA chính + 1 CTA phụ -->
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px">
-          <button class="btn lg" data-scroll-to="du-an">Tìm dự án ngay →</button>
-          <button class="btn o lg" data-nav="profile">Xem hồ sơ mẫu</button>
+        <div class="cta-row hd-guest">
+          <button class="btn lg" data-auth-open="register">Đăng ký miễn phí</button>
+          <button class="btn o lg" data-auth-open="login">Đăng nhập</button>
         </div>
-
-        <!-- D1 & D2: Search Box dưới CTA kèm Recent Searches & Autocomplete -->
-        <div class="srch-wrap" id="heroSearchWrap">
-          <div class="srch">
-            <span aria-hidden="true" style="color:var(--mut)">🔍</span>
-            <input id="q" type="search" autocomplete="off" placeholder="Tìm dự án: mô tả sản phẩm, quán cafe, thời trang..." aria-label="Tìm kiếm dự án">
-            <button class="btn sm" id="go">Tìm kiếm</button>
-          </div>
-          <div class="srch-dropdown" id="searchDropdown"></div>
+        <div class="cta-row hd-user-only">
+          <button class="btn lg" data-nav="projects">Xem dự án đang mở</button>
+          <button class="btn o lg" data-nav="workspace">Vào phòng làm việc</button>
         </div>
-
-        <!-- B5: Chỉ giữ đúng 2 Trust Badges cốt lõi -->
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
           <span class="tag ok" style="padding:6px 12px;font-size:12.5px">🟢 Xác minh .edu.vn</span>
           <span class="tag pu" style="padding:6px 12px;font-size:12.5px">🟣 Xác minh CCCD</span>
         </div>
       </div>
-
-      <!-- L7: Đặt Experience Card trong khu vực .hero-card-stage có nền tương phản -->
+            <!-- L7: Đặt Experience Card trong khu vực .hero-card-stage có nền tương phản -->
       <div class="hero-card-stage">
         <div class="xcard">
           <div class="xm">
@@ -166,7 +160,7 @@
       </div>
     </div>
 
-    <!-- B: SECTION "SỐ LIỆU THẬT" (SOCIAL PROOF) NGAY SAU HERO -->
+        <!-- B: SECTION "SỐ LIỆU THẬT" (SOCIAL PROOF) NGAY SAU HERO -->
     <div class="w">
       <div class="social-proof-bar">
         <div class="sp-item">
@@ -184,101 +178,44 @@
       </div>
     </div>
 
-    <!-- I: DI CHUYỂN TRUST SCORE LÊN CAO (TRƯỚC DANH SÁCH DỰ ÁN) -->
-    <section id="diem-tin-cay" class="w">
-      <div class="sec-head">
-        <div>
-          <span class="tag ok" style="margin-bottom:6px">Cơ chế cốt lõi</span>
-          <h2>Điểm tin cậy (Trust Score) minh bạch 100%</h2>
-          <p class="sh">Không có đánh giá ẩn. Kéo thử thanh trượt để xem Điểm tin cậy và Huy hiệu trên Thẻ kinh nghiệm thay đổi theo thời gian thực.</p>
-        </div>
-      </div>
-      <div class="g2">
-        <div class="tool" id="trustSlidersBox"></div>
-        <div class="tool" id="trustResultBox"></div>
+    <section class="w intro">
+      <h2>Sinh viên cần kinh nghiệm để được tuyển, nhưng chưa ai tuyển để có kinh nghiệm.</h2>
+      <div class="intro-cols">
+        <p>VeriWork phá vòng lặp này bằng bằng chứng. Mỗi dự án hoàn thành được nghiệm thu hai lớp và cấp một Thẻ kinh nghiệm có mã QR để nhà tuyển dụng tự kiểm tra.</p>
+        <p>Chúng tôi không hứa việc làm. Chúng tôi giúp bạn có thứ để đưa ra trong buổi phỏng vấn: dự án thật, khách hàng thật, kết quả kiểm chứng được.</p>
       </div>
     </section>
 
-    <!-- B & J2: SECTION "3 SINH VIÊN NỔI BẬT TUẦN NÀY" + CHỌN SO SÁNH SONG SONG -->
-    <section class="w" id="sinh-vien-noi-bat">
-      <div class="sec-head">
-        <div>
-          <span class="tag pu" style="margin-bottom:6px">Gương mặt tiêu biểu</span>
-          <h2>3 Sinh viên nổi bật tuần này</h2>
-          <p class="sh">Hồ sơ đã xác thực danh tính và đạt tỷ lệ nghiệm thu xuất sắc. Tích chọn 2–3 ứng viên để so sánh song song.</p>
+    <section class="w" id="loi-ich">
+      <div class="sec-head"><div>
+        <h2>Lợi ích cho từng bên</h2>
+        <p class="sh">Cơ chế giữ tiền và nghiệm thu bảo vệ cả hai phía.</p>
+      </div></div>
+      <div class="benefit-grid">
+        <div class="benefit">
+          <h3>Dành cho sinh viên</h3>
+          <dl>
+            <dt>Miễn phí hoàn toàn</dt><dd>Không phí nền tảng, không đặt cọc.</dd>
+            <dt>Thẻ kinh nghiệm có mã QR</dt><dd>Nhà tuyển dụng quét mã để kiểm chứng dự án bạn đã làm.</dd>
+            <dt>Tiền được giữ trước</dt><dd>Khách hàng nạp ngân sách trước khi bạn bắt đầu và tiền chỉ giải ngân sau nghiệm thu.</dd>
+            <dt>Bạn quyết định hiển thị gì</dt><dd>Chọn dự án nào xuất hiện trên hồ sơ, có thể ẩn danh khách hàng.</dd>
+          </dl>
+          <button class="link-btn hd-guest" data-auth-open="register">Tạo hồ sơ sinh viên</button>
+        </div>
+        <div class="benefit">
+          <h3>Dành cho khách hàng</h3>
+          <dl>
+            <dt>Sinh viên đã xác minh</dt><dd>Mọi sinh viên xác thực bằng email .edu.vn hoặc CCCD trước khi nhận việc.</dd>
+            <dt>Chỉ trả khi đạt chuẩn</dt><dd>Hoa hồng 10% chỉ tính khi dự án hoàn thành đạt Checklist nghiệm thu.</dd>
+            <dt>Nghiệm thu hai lớp</dt><dd>Sinh viên tự kiểm, sau đó quản trị viên duyệt trước khi sản phẩm đến tay bạn.</dd>
+            <dt>Quyền sở hữu rõ ràng</dt><dd>Bạn sở hữu sản phẩm sau thanh toán. Sinh viên chỉ được trưng bày theo Portfolio License.</dd>
+          </dl>
+          <button class="link-btn hd-guest" data-auth-open="register">Đăng ký tài khoản khách hàng</button>
         </div>
       </div>
-      <div class="pg" id="featuredStudentsGrid"></div>
     </section>
 
-    <!-- C & D: DANH SÁCH DỰ ÁN ĐANG MỞ + TÌM KIẾM, SẮP XẾP & BỘ LỌC NÂNG CAO -->
-    <section id="du-an" class="w">
-      <div class="sec-head">
-        <div>
-          <h2>Dự án đang mở nhận bài</h2>
-          <p class="sh">Tập trung chuyên sâu vào ngách viết nội dung cho shop và quán nhỏ để đảm bảo chất lượng kiểm duyệt 2 lớp.</p>
-        </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-          <button class="btn ghost sm" id="toggleAdvFilterBtn">⚙️ Bộ lọc nâng cao</button>
-          <select id="sortSelect" aria-label="Sắp xếp dự án" style="padding:8px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--s);color:var(--ink);font:600 13px inherit;min-height:40px">
-            <option value="newest">Sắp xếp: Mới nhất</option>
-            <option value="budget_desc">Ngân sách: Cao → Thấp</option>
-            <option value="deadline_asc">Thời hạn: Sắp hết hạn</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- D5: Chips danh mục có đếm số lượng -->
-      <div class="chips" id="categoryChips" role="group" aria-label="Lọc theo danh mục" style="margin-bottom:16px"></div>
-
-      <!-- D4: Bộ lọc nâng cao (Collapsible) -->
-      <div class="tool" id="advFilterPanel" style="display:none;margin-bottom:18px;background:var(--s2)">
-        <div class="stats-grid-4" style="align-items:center">
-          <div>
-            <label for="filterBudgetRange" style="font-size:13px;font-weight:700;display:flex;justify-content:space-between">
-              <span>Ngân sách tối thiểu:</span>
-              <span id="filterBudgetVal" style="color:var(--br)">0đ</span>
-            </label>
-            <input id="filterBudgetRange" type="range" min="0" max="800000" step="100000" value="0" style="width:100%;margin-top:8px;accent-color:var(--br)">
-          </div>
-          <div>
-            <div style="font-size:13px;font-weight:700;margin-bottom:6px">Thời hạn làm bài</div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap" id="durationFilterChips">
-              <button class="btn ghost sm" data-dur="all" aria-pressed="true" style="min-height:34px;padding:4px 10px">Tất cả</button>
-              <button class="btn ghost sm" data-dur="short" aria-pressed="false" style="min-height:34px;padding:4px 10px">≤ 4 ngày</button>
-              <button class="btn ghost sm" data-dur="med" aria-pressed="false" style="min-height:34px;padding:4px 10px">5–7 ngày</button>
-              <button class="btn ghost sm" data-dur="long" aria-pressed="false" style="min-height:34px;padding:4px 10px">> 7 ngày</button>
-            </div>
-          </div>
-          <div>
-            <div style="font-size:13px;font-weight:700;margin-bottom:6px">Trạng thái dự án</div>
-            <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;cursor:pointer">
-              <input type="checkbox" id="onlyOpenCheckbox" style="width:18px;height:18px;accent-color:var(--br)">
-              <span>Chỉ hiện dự án đang mở nhận bài</span>
-            </label>
-          </div>
-          <div style="display:flex;justify-content:flex-end">
-            <button class="btn ghost sm" id="resetFiltersBtn">Đặt lại bộ lọc</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="pg" id="projectsGrid"></div>
-    </section>
-
-    <!-- DỊCH VỤ ĐÓNG GÓI CHUẨN HÓA -->
-    <section id="dich-vu" class="w">
-      <div class="sec-head">
-        <div>
-          <h2>Gói dịch vụ có sẵn từ Sinh viên</h2>
-          <p class="sh">Phạm vi bàn giao, thời gian và số vòng sửa được cố định trước thành Checklist nghiệm thu tự động.</p>
-        </div>
-      </div>
-      <div class="pg" id="servicesGrid"></div>
-      <div id="serviceOrderSummary" style="margin-top:18px"></div>
-    </section>
-
-    <!-- CÁCH HOẠT ĐỘNG (CHO CẢ SINH VIÊN & KHÁCH HÀNG) -->
+        <!-- CÁCH HOẠT ĐỘNG (CHO CẢ SINH VIÊN & KHÁCH HÀNG) -->
     <section class="how" id="cach-hoat-dong">
       <div class="w">
         <div class="sec-head">
@@ -318,6 +255,139 @@
             <p>Miễn phí hoàn toàn cho sinh viên. Khách hàng chỉ trả 10% hoa hồng khi dự án hoàn thành đạt chuẩn.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="w" id="hoi-dap">
+      <div class="sec-head"><div><h2>Câu hỏi thường gặp</h2></div></div>
+      <div class="faq">
+        <details><summary>VeriWork có đảm bảo tôi có việc làm không?</summary><p>Không. VeriWork cấp bằng chứng kinh nghiệm có thể kiểm chứng. Việc có được tuyển hay không vẫn do nhà tuyển dụng quyết định.</p></details>
+        <details><summary>Ai có thể đăng ký?</summary><p>Sinh viên xác thực bằng email .edu.vn hoặc CCCD. Khách hàng xác thực số điện thoại và mã số thuế doanh nghiệp.</p></details>
+        <details><summary>Tiền được xử lý như thế nào?</summary><p>Khách hàng nạp ngân sách vào hệ thống trước khi làm. Tiền chỉ giải ngân khi sản phẩm đạt Checklist nghiệm thu.</p></details>
+        <details><summary>Sản phẩm sinh viên làm thuộc về ai?</summary><p>Khách hàng sở hữu sản phẩm sau thanh toán và cấp phép cho sinh viên trưng bày làm bằng chứng năng lực. Khách hàng có quyền chọn ẩn danh.</p></details>
+        <details><summary>Nếu có vấn đề trong lúc làm việc thì sao?</summary><p>Bấm báo cáo vấn đề trong Phòng làm việc. Chúng tôi phản hồi và phân xử trong 24 giờ.</p></details>
+      </div>
+    </section>
+
+    <section class="w">
+      <div class="cta-end">
+        <div><h2 style="color:#fff">Bắt đầu với dự án đầu tiên</h2><p class="sh" style="color:rgba(236,238,255,.85);margin:0">Đăng ký miễn phí và nhận Thẻ kinh nghiệm đầu tiên sau khi dự án được nghiệm thu.</p></div>
+        <div class="cta-row hd-guest" style="margin:0">
+          <button class="btn lg" style="background:var(--acc);border-color:var(--acc);color:#121533" data-auth-open="register">Đăng ký miễn phí</button>
+          <button class="btn ghost lg" style="color:#fff;border-color:rgba(255,255,255,.35)" data-auth-open="login">Đăng nhập</button>
+        </div>
+        <div class="cta-row hd-user-only" style="margin:0"><button class="btn lg" style="background:var(--acc);border-color:var(--acc);color:#121533" data-nav="projects">Xem dự án đang mở</button></div>
+      </div>
+    </section>
+  </div>
+
+  <div id="view-projects" class="view-panel">
+    <div class="w"><nav class="subnav" aria-label="Các mục chức năng"><button data-nav="projects" aria-current="page">Dự án</button><button data-nav="services">Dịch vụ</button><button data-nav="students">Sinh viên</button><button data-nav="trust">Điểm tin cậy</button></nav><ol class="page-steps" aria-label="Cách dùng mục này"><li>Lọc và chọn dự án phù hợp</li><li>Đọc checklist nghiệm thu trong trang chi tiết</li><li>Nhận việc và làm trong Phòng làm việc</li></ol></div>
+    <section id="du-an" class="w">
+      <div class="sec-head">
+        <div>
+          <h2>Dự án đang mở nhận bài</h2>
+          <p class="sh">Tập trung chuyên sâu vào ngách viết nội dung cho shop và quán nhỏ để đảm bảo chất lượng kiểm duyệt 2 lớp.</p>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <button class="btn ghost sm" id="toggleAdvFilterBtn">⚙️ Bộ lọc nâng cao</button>
+          <select id="sortSelect" aria-label="Sắp xếp dự án" style="padding:8px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--s);color:var(--ink);font:600 13px inherit;min-height:40px">
+            <option value="newest">Sắp xếp: Mới nhất</option>
+            <option value="budget_desc">Ngân sách: Cao → Thấp</option>
+            <option value="deadline_asc">Thời hạn: Sắp hết hạn</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- D5: Chips danh mục có đếm số lượng -->
+              <!-- D1 & D2: Search Box dưới CTA kèm Recent Searches & Autocomplete -->
+        <div class="srch-wrap" id="heroSearchWrap">
+          <div class="srch">
+            <span aria-hidden="true" style="color:var(--mut)">🔍</span>
+            <input id="q" type="search" autocomplete="off" placeholder="Tìm dự án: mô tả sản phẩm, quán cafe, thời trang..." aria-label="Tìm kiếm dự án">
+            <button class="btn sm" id="go">Tìm kiếm</button>
+          </div>
+          <div class="srch-dropdown" id="searchDropdown"></div>
+        </div>
+      <div class="chips" id="categoryChips" role="group" aria-label="Lọc theo danh mục" style="margin-bottom:16px"></div>
+
+      <!-- D4: Bộ lọc nâng cao (Collapsible) -->
+      <div class="tool" id="advFilterPanel" style="display:none;margin-bottom:18px;background:var(--s2)">
+        <div class="stats-grid-4" style="align-items:center">
+          <div>
+            <label for="filterBudgetRange" style="font-size:13px;font-weight:700;display:flex;justify-content:space-between">
+              <span>Ngân sách tối thiểu:</span>
+              <span id="filterBudgetVal" style="color:var(--br)">0đ</span>
+            </label>
+            <input id="filterBudgetRange" type="range" min="0" max="800000" step="100000" value="0" style="width:100%;margin-top:8px;accent-color:var(--br)">
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:700;margin-bottom:6px">Thời hạn làm bài</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap" id="durationFilterChips">
+              <button class="btn ghost sm" data-dur="all" aria-pressed="true" style="min-height:34px;padding:4px 10px">Tất cả</button>
+              <button class="btn ghost sm" data-dur="short" aria-pressed="false" style="min-height:34px;padding:4px 10px">≤ 4 ngày</button>
+              <button class="btn ghost sm" data-dur="med" aria-pressed="false" style="min-height:34px;padding:4px 10px">5–7 ngày</button>
+              <button class="btn ghost sm" data-dur="long" aria-pressed="false" style="min-height:34px;padding:4px 10px">> 7 ngày</button>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:700;margin-bottom:6px">Trạng thái dự án</div>
+            <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;cursor:pointer">
+              <input type="checkbox" id="onlyOpenCheckbox" style="width:18px;height:18px;accent-color:var(--br)">
+              <span>Chỉ hiện dự án đang mở nhận bài</span>
+            </label>
+          </div>
+          <div style="display:flex;justify-content:flex-end">
+            <button class="btn ghost sm" id="resetFiltersBtn">Đặt lại bộ lọc</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pg" id="projectsGrid"></div>
+    </section>
+  </div>
+
+  <div id="view-services" class="view-panel">
+    <div class="w"><nav class="subnav" aria-label="Các mục chức năng"><button data-nav="projects">Dự án</button><button data-nav="services" aria-current="page">Dịch vụ</button><button data-nav="students">Sinh viên</button><button data-nav="trust">Điểm tin cậy</button></nav><ol class="page-steps" aria-label="Cách dùng mục này"><li>Chọn gói theo nhu cầu</li><li>Xem phạm vi bàn giao và số vòng sửa</li><li>Đặt gói, tiền được giữ đến khi nghiệm thu</li></ol></div>
+    <section id="dich-vu" class="w">
+      <div class="sec-head">
+        <div>
+          <h2>Gói dịch vụ có sẵn từ Sinh viên</h2>
+          <p class="sh">Phạm vi bàn giao, thời gian và số vòng sửa được cố định trước thành Checklist nghiệm thu tự động.</p>
+        </div>
+      </div>
+      <div class="pg" id="servicesGrid"></div>
+      <div id="serviceOrderSummary" style="margin-top:18px"></div>
+    </section>
+  </div>
+
+  <div id="view-students" class="view-panel">
+    <div class="w"><nav class="subnav" aria-label="Các mục chức năng"><button data-nav="projects">Dự án</button><button data-nav="services">Dịch vụ</button><button data-nav="students" aria-current="page">Sinh viên</button><button data-nav="trust">Điểm tin cậy</button></nav><ol class="page-steps" aria-label="Cách dùng mục này"><li>Xem hồ sơ đã xác thực</li><li>Tích chọn 2–3 sinh viên</li><li>Bấm So sánh ngay ở thanh phía dưới</li></ol></div>
+    <section class="w" id="sinh-vien-noi-bat">
+      <div class="sec-head">
+        <div>
+          <span class="tag pu" style="margin-bottom:6px">Gương mặt tiêu biểu</span>
+          <h2>3 Sinh viên nổi bật tuần này</h2>
+          <p class="sh">Hồ sơ đã xác thực danh tính và đạt tỷ lệ nghiệm thu xuất sắc. Tích chọn 2–3 ứng viên để so sánh song song.</p>
+        </div>
+      </div>
+      <div class="pg" id="featuredStudentsGrid"></div>
+    </section>
+  </div>
+
+  <div id="view-trust" class="view-panel">
+    <div class="w"><nav class="subnav" aria-label="Các mục chức năng"><button data-nav="projects">Dự án</button><button data-nav="services">Dịch vụ</button><button data-nav="students">Sinh viên</button><button data-nav="trust" aria-current="page">Điểm tin cậy</button></nav><ol class="page-steps" aria-label="Cách dùng mục này"><li>Kéo từng thanh trượt</li><li>Xem điểm và huy hiệu đổi theo</li><li>Hiểu vì sao một hồ sơ đáng tin</li></ol></div>
+    <section id="diem-tin-cay" class="w">
+      <div class="sec-head">
+        <div>
+          <span class="tag ok" style="margin-bottom:6px">Cơ chế cốt lõi</span>
+          <h2>Điểm tin cậy (Trust Score) minh bạch 100%</h2>
+          <p class="sh">Không có đánh giá ẩn. Kéo thử thanh trượt để xem Điểm tin cậy và Huy hiệu trên Thẻ kinh nghiệm thay đổi theo thời gian thực.</p>
+        </div>
+      </div>
+      <div class="g2">
+        <div class="tool" id="trustSlidersBox"></div>
+        <div class="tool" id="trustResultBox"></div>
       </div>
     </section>
   </div>
@@ -658,11 +728,11 @@
 
 <!-- MOBILE BOTTOM NAVIGATION BAR -->
 <nav class="mobile-bottom-nav" aria-label="Điều hướng di động">
-  <button data-nav="home" aria-selected="true"><span class="m-ic">🏠</span><span>Khám phá</span></button>
-  <button data-nav="home" data-scroll-to="du-an" aria-selected="false"><span class="m-ic">💼</span><span>Dự án</span></button>
+  <button data-nav="home" aria-selected="true"><span class="m-ic">🏠</span><span>Trang chủ</span></button>
+  <button data-nav="projects" aria-selected="false"><span class="m-ic">💼</span><span>Dự án</span></button>
+  <button data-nav="services" aria-selected="false"><span class="m-ic">📦</span><span>Dịch vụ</span></button>
   <button data-nav="workspace" aria-selected="false"><span class="m-ic">⚡</span><span>Làm việc</span></button>
-  <button data-nav="profile" aria-selected="false"><span class="m-ic">👤</span><span>Hồ sơ</span></button>
-  <button data-nav="account" aria-selected="false"><span class="m-ic">💳</span><span>Ví & TK</span></button>
+  <button data-nav="account" aria-selected="false"><span class="m-ic">👤</span><span>Tài khoản</span></button>
 </nav>
 
 <!-- TOAST NOTIFICATION -->
@@ -677,15 +747,15 @@
       </div>
       <div>
         <h5>Dành cho Sinh viên</h5>
-        <a data-nav="home" data-scroll-to="du-an">Tìm dự án đang mở</a>
+        <a data-nav="projects">Tìm dự án đang mở</a>
         <a data-nav="profile">Hồ sơ năng lực mẫu (/u/minhanh)</a>
         <a data-nav="verify">Cổng tra cứu mã QR (/verify)</a>
       </div>
       <div>
         <h5>Dành cho Khách hàng</h5>
         <a id="footerPostBtn">Đăng dự án mới</a>
-        <a data-nav="home" data-scroll-to="dich-vu">Mua gói dịch vụ chuẩn hóa</a>
-        <a data-nav="home" data-scroll-to="sinh-vien-noi-bat">So sánh & Chọn sinh viên</a>
+        <a data-nav="services">Mua gói dịch vụ chuẩn hóa</a>
+        <a data-nav="students">So sánh & Chọn sinh viên</a>
       </div>
       <div>
         <h5>Pháp lý & Bảo mật</h5>
