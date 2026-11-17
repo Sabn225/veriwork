@@ -1,0 +1,66 @@
+// ILLUSTRATIVE DATA ONLY. These listings are samples for the landing-page explorer and are labelled as such in the UI.
+// Replace this module with a real data source (API call) when project listings exist.
+export const PROJECT_CATEGORIES = ['writing', 'design', 'development', 'marketing', 'data'];
+
+export const SAMPLE_PROJECTS = [
+  {
+    id: 'p1',
+    category: 'writing',
+    skills: ['Copywriting', 'SEO'],
+    budget: { min: 120, max: 250, unit: 'fixed' },
+    duration: { en: '3 weeks', vi: '3 tuần' },
+    title: { en: 'Blog articles for a sustainable-fashion label', vi: 'Bài blog cho một thương hiệu thời trang bền vững' },
+    summary: { en: 'Four researched articles on materials and care, written to rank for long-tail search terms.', vi: 'Bốn bài viết có nghiên cứu về chất liệu và cách bảo quản, tối ưu cho các từ khóa dài.' },
+    detail: { en: 'You will receive a keyword brief and a style guide. Each article is about 900 words, with sources listed and one round of edits included.', vi: 'Bạn sẽ nhận bản brief từ khóa và hướng dẫn văn phong. Mỗi bài khoảng 900 từ, có nguồn tham khảo và gồm một lần chỉnh sửa.' },
+  },
+  {
+    id: 'p2',
+    category: 'design',
+    skills: ['Figma', 'Branding'],
+    budget: { min: 150, max: 300, unit: 'fixed' },
+    duration: { en: '2 weeks', vi: '2 tuần' },
+    title: { en: 'Social media templates for a language centre', vi: 'Mẫu thiết kế mạng xã hội cho một trung tâm ngoại ngữ' },
+    summary: { en: 'A set of ten editable post and story templates that follow the centre’s existing colours.', vi: 'Bộ mười mẫu bài đăng và story có thể chỉnh sửa, theo màu sắc sẵn có của trung tâm.' },
+    detail: { en: 'Deliver editable Figma files and exported PNGs. The centre will share its logo and colour palette at the start.', vi: 'Bàn giao file Figma có thể chỉnh sửa và ảnh PNG đã xuất. Trung tâm sẽ gửi logo và bảng màu ngay từ đầu.' },
+  },
+  {
+    id: 'p3',
+    category: 'development',
+    skills: ['React', 'CSS'],
+    budget: { min: 200, max: 400, unit: 'fixed' },
+    duration: { en: '4 weeks', vi: '4 tuần' },
+    title: { en: 'Landing page for a student club', vi: 'Landing page cho một câu lạc bộ sinh viên' },
+    summary: { en: 'A responsive single-page site with an events section and a sign-up link.', vi: 'Trang một cột responsive có phần sự kiện và liên kết đăng ký.' },
+    detail: { en: 'Design is provided. You build and deploy it, and hand over a short README so club members can update the events list.', vi: 'Thiết kế được cung cấp sẵn. Bạn xây dựng và triển khai, đồng thời bàn giao README ngắn để thành viên câu lạc bộ cập nhật danh sách sự kiện.' },
+  },
+  {
+    id: 'p4',
+    category: 'marketing',
+    skills: ['Video scripting', 'Social media'],
+    budget: { min: 10, max: 18, unit: 'hour' },
+    duration: { en: 'Ongoing, 5 hrs/week', vi: 'Liên tục, 5 giờ/tuần' },
+    title: { en: 'Short-form video scripts for a coffee shop', vi: 'Kịch bản video ngắn cho một quán cà phê' },
+    summary: { en: 'Weekly scripts for 30-second videos that show the menu, the staff and the neighbourhood.', vi: 'Kịch bản hằng tuần cho video 30 giây giới thiệu thực đơn, nhân viên và khu phố.' },
+    detail: { en: 'Two scripts per week with shot lists. The shop films and posts; you write and adjust based on what performs.', vi: 'Hai kịch bản mỗi tuần kèm danh sách cảnh quay. Quán tự quay và đăng; bạn viết và điều chỉnh dựa trên hiệu quả.' },
+  },
+  {
+    id: 'p5',
+    category: 'data',
+    skills: ['Excel', 'Data analysis'],
+    budget: { min: 180, max: 350, unit: 'fixed' },
+    duration: { en: '3 weeks', vi: '3 tuần' },
+    title: { en: 'Survey analysis for a campus research team', vi: 'Phân tích khảo sát cho một nhóm nghiên cứu sinh viên' },
+    summary: { en: 'Clean about 600 survey responses and summarise the main patterns in a short report.', vi: 'Làm sạch khoảng 600 phản hồi khảo sát và tóm tắt các xu hướng chính trong một báo cáo ngắn.' },
+    detail: { en: 'Raw responses arrive as a spreadsheet. Deliver a cleaned dataset, five charts and a two-page summary of findings.', vi: 'Dữ liệu thô được gửi dưới dạng bảng tính. Bàn giao bộ dữ liệu đã làm sạch, năm biểu đồ và bản tóm tắt kết quả hai trang.' },
+  },
+  {
+    id: 'p6',
+    category: 'writing',
+    skills: ['Translation', 'Proofreading'],
+    budget: { min: 8, max: 14, unit: 'hour' },
+    duration: { en: '2 weeks', vi: '2 tuần' },
+    title: { en: 'English–Vietnamese translation of onboarding guides', vi: 'Dịch hướng dẫn nhập môn Anh–Việt' },
+    summary: { en: 'Translate six short staff onboarding guides and keep the tone friendly and clear.', vi: 'Dịch sáu tài liệu hướng dẫn nhân viên mới, giữ giọng văn thân thiện và rõ ràng.' },
+    detail: { en: 'Each guide is two to three pages. A glossary of company terms is provided, and a bilingual reviewer checks the final text.', vi: 'Mỗi tài liệu dài hai đến ba trang. Có sẵn bảng thuật ngữ của công ty và một người song ngữ sẽ rà soát bản cuối.' },
+  },
+];

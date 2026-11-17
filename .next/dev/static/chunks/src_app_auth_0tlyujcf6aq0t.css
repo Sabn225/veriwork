@@ -1,0 +1,143 @@
+/* [project]/src/app/auth.css [app-client] (css) */
+.auth {
+  background: var(--background);
+  min-height: 100dvh;
+  display: flex;
+}
+
+.auth-col {
+  min-width: 0;
+  padding: 0 var(--gutter);
+  flex-direction: column;
+  flex: 1;
+  display: flex;
+}
+
+.auth-top {
+  height: var(--header-h);
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  display: flex;
+}
+
+.auth-tools {
+  align-items: center;
+  gap: 4px;
+  display: flex;
+}
+
+.auth-main {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 0 64px;
+  display: flex;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-title {
+  letter-spacing: -.02em;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.auth-lead {
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+.auth-form {
+  gap: 18px;
+  margin-top: 28px;
+  display: grid;
+}
+
+.auth-form .btn {
+  width: 100%;
+}
+
+.auth-row {
+  justify-content: flex-end;
+  margin-top: -8px;
+  display: flex;
+}
+
+.auth-alt {
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 24px;
+  font-size: .9375rem;
+}
+
+.auth-alt a, .auth-link {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.auth-alt a:hover, .auth-link:hover {
+  text-underline-offset: 3px;
+  text-decoration: underline;
+}
+
+.auth-link {
+  font-size: .875rem;
+}
+
+.auth-panel {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .auth-col {
+    flex: 0 0 52%;
+    padding: 0 48px;
+  }
+
+  .auth-panel {
+    color: #f2f5fa;
+    background: radial-gradient(ellipse at 85% 0%, #3b82f657, transparent 55%), linear-gradient(165deg, var(--navy), var(--navy-deep));
+    flex-direction: column;
+    flex: 1;
+    justify-content: flex-end;
+    padding: 56px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .auth-panel:before {
+    content: "";
+    background-image: linear-gradient(#ffffff0b 1px, #0000 1px), linear-gradient(90deg, #ffffff0b 1px, #0000 1px);
+    background-size: 48px 48px;
+    position: absolute;
+    inset: 0;
+    -webkit-mask-image: linear-gradient(160deg, #000, #0000 70%);
+    mask-image: linear-gradient(160deg, #000, #0000 70%);
+  }
+
+  .auth-panel > * {
+    position: relative;
+  }
+}
+
+.auth-panel-title {
+  letter-spacing: -.03em;
+  max-width: 14ch;
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.auth-panel-text {
+  color: #a8b3c7;
+  max-width: 38ch;
+  margin-top: 16px;
+}
+
+/*# sourceMappingURL=src_app_auth_0tlyujcf6aq0t.css.map*/
